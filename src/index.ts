@@ -24,8 +24,8 @@ class CarRender {
     }
 
     private static async _carsShow(): Promise<void> {
-        const carsDiv = document.querySelector('#carsDiv');
-        carsDiv.innerHTML =''
+        const carsDiv = document.querySelector('#carsDiv') as HTMLDivElement;
+        carsDiv.innerHTML = ''
         const cars = await carService.getAll();
         cars.forEach(car => {
             const {id, brand, price, year} = car;
@@ -33,7 +33,7 @@ class CarRender {
             itemDiv.innerText = `${id}) ${brand} -- ${price} -- ${year}`
             const btn = document.createElement('button');
             btn.innerText = 'delete'
-            btn.onclick = async ():Promise<void> =>{
+            btn.onclick = async (): Promise<void> => {
                 await carService.deleteById(id)
                 await this._carsShow()
             }
@@ -43,7 +43,7 @@ class CarRender {
     }
 
     private static _initForm(): void {
-        const form = document.forms.namedItem('form') as HTMLFormElement
+        const form = document.forms.namedItem('form');
         // const {brand, price, year} = form;
         const brand = form.brand as HTMLInputElement;
         const price = form.price as HTMLInputElement;
